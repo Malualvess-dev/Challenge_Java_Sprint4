@@ -19,7 +19,7 @@ public class PacienteRepository {
     @Inject
     DataSource dataSource; //Gerencia conexão com base de dados
 
-    //Classe Inserção de dados
+    //Classe Inserção de dados---- Funcionando
     public void inserir(PacienteDTO p) throws SQLException {
         String sql = "Insert into paciente(nm_paciente,cpf_paciente,email_paciente, telefone_paciente, dt_nascimento) values (?,?,?,?,?)";
         try(Connection con = dataSource.getConnection();
@@ -35,7 +35,7 @@ public class PacienteRepository {
         }
     }
 
-    //LER informações
+    //LER informações //Funcionando
 
     public List<Paciente> listar() throws  SQLException{
         String sql = "Select * from paciente Order by id_paciente";

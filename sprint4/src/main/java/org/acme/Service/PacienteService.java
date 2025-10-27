@@ -15,9 +15,11 @@ public class PacienteService {
     @Inject //Inserir
     PacienteRepository pacienteRepository;
 
+    //Inserir
     public void inserir(PacienteDTO p) throws SQLException {
         pacienteRepository.inserir(p);
     }
+
 
     //Listar
     public List<Paciente> listar()throws SQLException{
