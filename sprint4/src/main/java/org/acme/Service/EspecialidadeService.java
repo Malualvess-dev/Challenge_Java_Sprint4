@@ -1,0 +1,29 @@
+package org.acme.Service;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import org.acme.Model.DTO.EspecialidadeDTO;
+import org.acme.Model.DTO.PacienteDTO;
+import org.acme.Model.Especialidade;
+import org.acme.Model.Paciente;
+import org.acme.Repository.EspecialidadeRepository;
+
+import java.sql.SQLException;
+import java.util.List;
+
+@ApplicationScoped
+public class EspecialidadeService {
+    @Inject
+    EspecialidadeRepository especialidadeRepository;
+
+    //Inserir
+    public void inserir(EspecialidadeDTO esp) throws SQLException {
+        especialidadeRepository.inserir(esp);
+    }
+
+    //Ler
+
+    public List<Especialidade> listar()throws SQLException{
+        return especialidadeRepository.listar();
+    }
+}
