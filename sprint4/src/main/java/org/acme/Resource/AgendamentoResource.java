@@ -1,16 +1,16 @@
 package org.acme.Resource;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.Model.Agendamento;
 import org.acme.Model.DTO.AgendamentoDTO;
+import org.acme.Model.Paciente;
 import org.acme.Service.AgendamentoService;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Path("/agendamentos")
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +38,16 @@ public class AgendamentoResource {
     }
 
     //Listar
+
+    @GET
+    public Response listar(){
+        try{
+            List<Agendamento> listaAgendamento = agendamentoService.listar();
+            return  Response.status(Response.Status.OK).entity(listaAgendamento).build();
+        } catch (SQLException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro de conexão com a Base de Dados").build();
+        }
+    }
 
 
 }

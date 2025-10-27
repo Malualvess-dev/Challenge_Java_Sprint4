@@ -8,7 +8,10 @@ import org.acme.Model.DTO.AgendamentoDTO;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @ApplicationScoped
 public class AgendamentoRepository {
@@ -34,6 +37,33 @@ public class AgendamentoRepository {
 
 
     //LER dados
+
+    public List<Agendamento> listar() throws SQLException{
+        String sql = "Select * from agendamento Order by id_agendamento";
+
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ResultSet rs = ps.executeQuery();
+
+            List<Agendamento> listaAgendamento = new ArrayList<>();
+            while (rs.next()){
+                Agendamento a = new Agendamento(rs.getInt(1),
+                                                rs.getString(2),
+                                                rs.getString(3),
+                                                rs.getString(4).charAt(0),
+                                                rs.getInt(5)
+                );
+
+                listaAgendamento.add(a);
+
+            }
+
+            return listaAgendamento;
+        }
+    }
+
+    //--------------------------------------------------------------------------
 }
 
 

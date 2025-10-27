@@ -30,12 +30,12 @@ public class AgendamentoDTO {
         this.dt_agendamento = dt_agendamento;
     }
 
-    public String getHr_agendamento() {
-        return hr_agendamento;
+    public int getId_paciente() {
+        return id_paciente;
     }
 
-    public void setHr_agendamento(String hr_agendamento) {
-        this.hr_agendamento = hr_agendamento;
+    public void setId_paciente(int id_paciente) {
+        this.id_paciente = id_paciente;
     }
 
     public char getSt_agendamento() {
@@ -46,11 +46,11 @@ public class AgendamentoDTO {
         this.st_agendamento = st_agendamento;
     }
 
-    public int getId_paciente() {
-        return id_paciente;
+    public String getHr_agendamento() {
+        return hr_agendamento;
     }
 
-    public void setId_paciente(int id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setHr_agendamento(String hr_agendamento) {
+        this.hr_agendamento = hr_agendamento;
     }
 }
