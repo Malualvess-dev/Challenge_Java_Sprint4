@@ -2,10 +2,10 @@ package org.acme.Repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.Model.DTO.HistoricoDTO;
 import org.acme.Model.DTO.PacienteDTO;
-import org.acme.Model.Historico;
+import org.acme.Model.DTO.ProntuarioDTO;
 import org.acme.Model.Paciente;
+import org.acme.Model.Prontuario;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,47 +16,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
-public class HistoricoRepository {
+public class ProntuarioRepository {
     @Inject
     DataSource dataSource;
 
-    //Inserir
+    //Criar
 
-    public void inserir(HistoricoDTO his) throws SQLException {
-        String sql = "Insert into historico(tp_atendimento, dt_historico, id_paciente) values (?,?,?)";
+    public void inserir(ProntuarioDTO p) throws SQLException {
+        String sql = "Insert into prontuario(descricao,dt_registro,id_paciente) values (?,?,?)";
         try(Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
 
-            ps.setString(1,his.getTp_atendimento());
-            ps.setString(2, his.getDt_atendimento());
-            ps.setInt(3,his.getId_paciente());
+            ps.setString(1,p.getDescricao());
+            ps.setString(2, p.getDt_registro());
+            ps.setInt(3,p.getId_paciente());
 
             ps.executeUpdate();
         }
     }
 
-    //LER
+    //LER informações //Funcionando
 
-    public List<Historico> listar() throws  SQLException{
-        String sql = "Select * from historico Order by id_historico";
+    public List<Prontuario> listar() throws  SQLException{
+        String sql = "Select * from prontuario Order by id_prontuario";
         try(Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
 
             ResultSet rs = ps.executeQuery(); // Lista
 
-            List<Historico> listaHistorico = new ArrayList<>();
+            List<Prontuario> listaProntuario = new ArrayList<>();
             while (rs.next()){
 
-                Historico his = new Historico(rs.getInt(1),
+                Prontuario p = new Prontuario(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4));
 
-                listaHistorico.add(his);
+                listaProntuario.add(p);
 
             }
 
-            return listaHistorico;
+            return listaProntuario;
         }
     }
 }

@@ -9,10 +9,10 @@ public class Prontuario {
     //Construtores
 
 
-    public ProntuarioDTO() {
+    public Prontuario() {
     }
 
-    public ProntuarioDTO(int id_prontuario, String descricao, String dt_registro, int id_paciente) {
+    public Prontuario(int id_prontuario, String descricao, String dt_registro, int id_paciente) {
         this.id_prontuario = id_prontuario;
         this.descricao = descricao;
         this.dt_registro = dt_registro;

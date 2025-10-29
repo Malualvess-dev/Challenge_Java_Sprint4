@@ -1,7 +1,7 @@
 package org.acme.Model.DTO;
 
 public class MedicoDTO {
-    private String CRM;
+    private int CRM;
     private String nm_medico;
     private String email_medico;
     private String tf_medico;
@@ -13,7 +13,7 @@ public class MedicoDTO {
     public MedicoDTO() {
     }
 
-    public MedicoDTO(String CRM, String nm_medico, String email_medico, String tf_medico, int id_especialidade) {
+    public MedicoDTO(int CRM, String nm_medico, String email_medico, String tf_medico, int id_especialidade) {
         this.CRM = CRM;
         this.nm_medico = nm_medico;
         this.email_medico = email_medico;
@@ -24,11 +24,11 @@ public class MedicoDTO {
     //GET e SET
 
 
-    public String getCRM() {
+    public int getCRM() {
         return CRM;
     }
 
-    public void setCRM(String CRM) {
+    public void setCRM(int CRM) {
         this.CRM = CRM;
     }
 

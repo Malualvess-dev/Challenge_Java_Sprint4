@@ -2,7 +2,7 @@ package org.acme.Model.DTO;
 
 public class HistoricoDTO {
     private String tp_atendimento;
-    private String dt_atendimento;
+    private String dt_historico;
     private int id_paciente;
 
     //Construtores
@@ -11,9 +11,9 @@ public class HistoricoDTO {
     public HistoricoDTO() {
     }
 
-    public HistoricoDTO(String tp_atendimento, String dt_atendimento, int id_paciente) {
+    public HistoricoDTO(String tp_atendimento, String dt_historico, int id_paciente) {
         this.tp_atendimento = tp_atendimento;
-        this.dt_atendimento = dt_atendimento;
+        this.dt_historico = dt_historico;
         this.id_paciente = id_paciente;
     }
 
@@ -29,11 +29,11 @@ public class HistoricoDTO {
     }
 
     public String getDt_atendimento() {
-        return dt_atendimento;
+        return dt_historico;
     }
 
     public void setDt_atendimento(String dt_atendimento) {
-        this.dt_atendimento = dt_atendimento;
+        this.dt_historico = dt_atendimento;
     }
 
     public int getId_paciente() {

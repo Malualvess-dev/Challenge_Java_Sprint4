@@ -2,9 +2,9 @@ package org.acme.Repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.Model.DTO.HistoricoDTO;
+import org.acme.Model.DTO.MedicoDTO;
 import org.acme.Model.DTO.PacienteDTO;
-import org.acme.Model.Historico;
+import org.acme.Model.Medico;
 import org.acme.Model.Paciente;
 
 import javax.sql.DataSource;
@@ -16,20 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
-public class HistoricoRepository {
+public class MedicoRepository {
     @Inject
     DataSource dataSource;
 
-    //Inserir
+    //create
 
-    public void inserir(HistoricoDTO his) throws SQLException {
-        String sql = "Insert into historico(tp_atendimento, dt_historico, id_paciente) values (?,?,?)";
+    public void inserir(MedicoDTO m) throws SQLException {
+        String sql = "Insert into medico(crm,nm_medico,email_medico,tf_medico,id_especialidade) values (?,?,?,?,?)";
         try(Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
-
-            ps.setString(1,his.getTp_atendimento());
-            ps.setString(2, his.getDt_atendimento());
-            ps.setInt(3,his.getId_paciente());
+            ps.setInt(1,m.getCRM());
+            ps.setString(2,m.getNm_medico());
+            ps.setString(3,m.getEmail_medico());
+            ps.setString(4,m.getTf_medico());
+            ps.setInt(5,m.getId_especialidade());
 
             ps.executeUpdate();
         }
@@ -37,26 +38,28 @@ public class HistoricoRepository {
 
     //LER
 
-    public List<Historico> listar() throws  SQLException{
-        String sql = "Select * from historico Order by id_historico";
+    public List<Medico> listar() throws  SQLException{
+        String sql = "Select * from medico Order by id_medico";
         try(Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
 
             ResultSet rs = ps.executeQuery(); // Lista
 
-            List<Historico> listaHistorico = new ArrayList<>();
+            List<Medico> listaMedico = new ArrayList<>();
             while (rs.next()){
 
-                Historico his = new Historico(rs.getInt(1),
+                Medico m = new Medico(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4));
-
-                listaHistorico.add(his);
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6));
+                listaMedico.add(m);
 
             }
 
-            return listaHistorico;
+            return listaMedico;
         }
+
     }
 }
