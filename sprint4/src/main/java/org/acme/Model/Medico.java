@@ -1,0 +1,76 @@
+package org.acme.Model;
+
+public class Medico {
+    private int id_medico;
+    private String CRM;
+    private String nm_medico;
+    private String email_medico;
+    private String tf_medico;
+    private int id_especialidade;
+
+    //Construtores
+
+
+    public Medico() {
+    }
+
+    public Medico(int id_medico, String CRM, String nm_medico, String email_medico, String tf_medico, int id_especialidade) {
+        this.id_medico = id_medico;
+        this.CRM = CRM;
+        this.nm_medico = nm_medico;
+        this.email_medico = email_medico;
+        this.tf_medico = tf_medico;
+        this.id_especialidade = id_especialidade;
+    }
+
+    //GET E SET
+
+
+    public int getId_medico() {
+        return id_medico;
+    }
+
+    public void setId_medico(int id_medico) {
+        this.id_medico = id_medico;
+    }
+
+    public String getCRM() {
+        return CRM;
+    }
+
+    public void setCRM(String CRM) {
+        this.CRM = CRM;
+    }
+
+    public String getNm_medico() {
+        return nm_medico;
+    }
+
+    public void setNm_medico(String nm_medico) {
+        this.nm_medico = nm_medico;
+    }
+
+    public String getEmail_medico() {
+        return email_medico;
+    }
+
+    public void setEmail_medico(String email_medico) {
+        this.email_medico = email_medico;
+    }
+
+    public String getTf_medico() {
+        return tf_medico;
+    }
+
+    public void setTf_medico(String tf_medico) {
+        this.tf_medico = tf_medico;
+    }
+
+    public int getId_especialidade() {
+        return id_especialidade;
+    }
+
+    public void setId_especialidade(int id_especialidade) {
+        this.id_especialidade = id_especialidade;
+    }
+}
