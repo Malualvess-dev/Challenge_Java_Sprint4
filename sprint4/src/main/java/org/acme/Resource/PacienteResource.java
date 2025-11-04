@@ -50,6 +50,21 @@ public class PacienteResource {
 
     //DELETE
 
+    //ELE não deleta caso esteja associado com outra tabela
+    @DELETE
+    @Path("/{id_paciente}")
+    public Response deletar(@PathParam("id_paciente") int id_paciente){
+        try {
+            pacienteService.remove(id_paciente);
+            return Response.status(Response.Status.OK).entity("Dado removido").build();
+        } catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }catch (IllegalArgumentException e){
+            return Response.status(422).entity(e.getMessage()).build();
+        }catch (RuntimeException e){
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
 
 
 

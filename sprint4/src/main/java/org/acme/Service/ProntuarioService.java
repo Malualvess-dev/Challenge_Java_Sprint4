@@ -27,4 +27,13 @@ public class ProntuarioService {
     public List<Prontuario> listar()throws SQLException{
         return prontuarioRepository.listar();
     }
+
+    //Delete
+
+    public void remove(int id_prontuario) throws SQLException, IllegalArgumentException,RuntimeException{
+        if (id_prontuario < 0){
+            throw new IllegalArgumentException("ID menor do que 0");
+        }
+        prontuarioRepository.remover(id_prontuario);
+    }
 }

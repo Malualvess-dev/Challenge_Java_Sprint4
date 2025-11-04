@@ -49,5 +49,23 @@ public class AgendamentoResource {
         }
     }
 
+    //DELETE
+
+    //ELE não deleta caso esteja associado com outra tabela
+    @DELETE
+    @Path("/{id_agendamento}")
+    public Response deletar(@PathParam("id_agendamento") int id_agendamento){
+        try {
+            agendamentoService.remove(id_agendamento);
+            return Response.status(Response.Status.OK).entity("Dado removido").build();
+        } catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }catch (IllegalArgumentException e){
+            return Response.status(422).entity(e.getMessage()).build();
+        }catch (RuntimeException e){
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
+
 
 }

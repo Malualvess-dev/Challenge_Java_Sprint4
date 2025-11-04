@@ -26,4 +26,13 @@ public class AgendamentoService {
     public List<Agendamento> listar()throws SQLException{
         return agendamentoRepository.listar();
     }
+
+    //Delete
+
+    public void remove(int id_agendamento) throws SQLException, IllegalArgumentException,RuntimeException{
+        if (id_agendamento < 0){
+            throw new IllegalArgumentException("ID menor do que 0");
+        }
+        agendamentoRepository.remover(id_agendamento);
+    }
 }

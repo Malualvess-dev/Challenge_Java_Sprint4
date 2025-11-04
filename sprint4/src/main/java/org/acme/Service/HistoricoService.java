@@ -28,4 +28,13 @@ public class HistoricoService {
     public List<Historico> listar()throws SQLException{
         return historicoRepository.listar();
     }
+
+    //Delete
+
+    public void remove(int id_historico) throws SQLException, IllegalArgumentException,RuntimeException{
+        if (id_historico < 0){
+            throw new IllegalArgumentException("ID menor do que 0");
+        }
+        historicoRepository.remover(id_historico);
+    }
 }

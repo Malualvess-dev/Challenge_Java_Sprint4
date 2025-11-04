@@ -63,6 +63,22 @@ public class AgendamentoRepository {
         }
     }
 
+    //DELETE
+
+    public void remover(int id_agendamento) throws SQLException{
+        String sql = "Delete from Agendamento where id_agendamento = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id_agendamento);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0){
+                throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
+
     //--------------------------------------------------------------------------
 }
 

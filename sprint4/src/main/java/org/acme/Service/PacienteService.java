@@ -26,6 +26,15 @@ public class PacienteService {
         return pacienteRepository.listar();
     }
 
+    //Delete
+
+    public void remove(int id_paciente) throws SQLException, IllegalArgumentException,RuntimeException{
+        if (id_paciente < 0){
+            throw new IllegalArgumentException("ID menor do que 0");
+        }
+        pacienteRepository.remover(id_paciente);
+    }
+
 
 
 

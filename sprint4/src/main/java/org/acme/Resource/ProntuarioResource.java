@@ -48,4 +48,22 @@ public class ProntuarioResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro de conexão com a Base de Dados").build();
         }
     }
+
+    //DELETE
+
+    //ELE não deleta caso esteja associado com outra tabela
+    @DELETE
+    @Path("/{id_prontuario}")
+    public Response deletar(@PathParam("id_prontuario") int id_prontuario){
+        try {
+            prontuarioService.remove(id_prontuario);
+            return Response.status(Response.Status.OK).entity("Dado removido").build();
+        } catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }catch (IllegalArgumentException e){
+            return Response.status(422).entity(e.getMessage()).build();
+        }catch (RuntimeException e){
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
 }

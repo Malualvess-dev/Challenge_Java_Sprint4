@@ -59,4 +59,20 @@ public class ProntuarioRepository {
             return listaProntuario;
         }
     }
+
+    //DELETE
+
+    public void remover(int id_prontuario) throws SQLException{
+        String sql = "Delete from Prontuario where id_prontuario = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id_prontuario);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0){
+                throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
 }

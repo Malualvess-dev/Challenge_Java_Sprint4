@@ -60,6 +60,20 @@ public class PacienteRepository {
 
     //Delete
 
+    public void remover(int id_paciente) throws SQLException{
+        String sql = "Delete from Paciente where id_paciente = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id_paciente);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0){
+                throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
+
 
 
 

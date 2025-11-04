@@ -59,4 +59,18 @@ public class HistoricoRepository {
             return listaHistorico;
         }
     }
+
+    public void remover(int id_historico) throws SQLException{
+        String sql = "Delete from Historico where id_historico = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id_historico);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0){
+                throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
 }
