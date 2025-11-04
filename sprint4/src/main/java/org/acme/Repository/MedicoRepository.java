@@ -62,4 +62,20 @@ public class MedicoRepository {
         }
 
     }
+
+    //DELETE
+
+    public void remover(int id_medico) throws SQLException{
+        String sql = "Delete from medico where id_medico = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id_medico);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0){
+                throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
 }

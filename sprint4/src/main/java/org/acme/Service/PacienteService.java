@@ -29,6 +29,18 @@ public class PacienteService {
 
 
 
+
+
+
+
+
+
+
+
+
+
+    //Validações
+
     public void validacao(PacienteDTO p)  {
         if(p == null || p.getNm_paciente().isEmpty() ){
             throw  new IllegalArgumentException("Nome incorreto");
@@ -37,5 +49,16 @@ public class PacienteService {
         if (p == null || p.getCpf_paciente().isEmpty()){
             throw  new IllegalArgumentException("CPF incorreto");
         }
+        if (p == null || p.getEmail_paciente().isEmpty()){
+            throw  new IllegalArgumentException("Email incorreto");
+        }
+        if (p== null || p.getTelefone_paciente().isEmpty()){
+            throw new IllegalArgumentException("Telefone incorreto");
+        }
     }
-}
+    }
+
+
+
+
+

@@ -26,4 +26,13 @@ public class MedicoService {
     public List<Medico> listar()throws SQLException{
         return medicoRepository.listar();
     }
+
+    //Delete
+
+    public void remove(int id_medico) throws SQLException, IllegalArgumentException,RuntimeException{
+        if (id_medico < 0){
+            throw new IllegalArgumentException("ID menor do que 0");
+        }
+        medicoRepository.remover(id_medico);
+    }
 }

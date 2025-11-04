@@ -7,10 +7,7 @@ import org.acme.Model.DTO.PacienteDTO;
 import org.acme.Model.Paciente;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +57,31 @@ public class PacienteRepository {
             return listaPaciente;
     }
     }
+
+    //Delete
+
+
+
+
+
+
+
+    //Verifica ID
+
+    public boolean verificaID(int id_paciente)throws SQLException{
+        String sql ="Select count(*) from paciente where id = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setInt(1,id_paciente);
+            ResultSet rs = ps.executeQuery();
+            //tem proximo elemento? e se tem é maior que 0
+            return (rs.next() && rs.getInt(1)>0);
+        }
+
+    }
+
+
+
 
 
 }

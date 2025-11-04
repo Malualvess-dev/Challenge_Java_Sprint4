@@ -26,4 +26,13 @@ public class EspecialidadeService {
     public List<Especialidade> listar()throws SQLException{
         return especialidadeRepository.listar();
     }
+
+    //Delete
+
+    public void remove(int id_especialidade) throws SQLException, IllegalArgumentException,RuntimeException{
+        if (id_especialidade < 0){
+            throw new IllegalArgumentException("ID menor do que 0");
+        }
+        especialidadeRepository.remover(id_especialidade);
+    }
 }

@@ -54,4 +54,35 @@ public class EspecialidadeRepository {
             return listaEspecialidade;
         }
     }
+
+    //DELETE
+
+    public void remover(int id_especialidade) throws SQLException{
+        String sql = "Delete from Especialidade where id_especialidade = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id_especialidade);
+
+            int linhasAfetadas = ps.executeUpdate();
+            if (linhasAfetadas == 0){
+                throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
+
+    //Validação
+
+    public boolean verificaID(int id_especialidade)throws SQLException{
+        String sql ="Select * from Especialidade where id_especialidade = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setInt(1,id_especialidade);
+            ResultSet rs = ps.executeQuery();
+            //tem proximo elemento? e se tem é maior que 0
+            return (rs.next() && rs.getInt(1)>0);
+        }
+
+    }
+
 }

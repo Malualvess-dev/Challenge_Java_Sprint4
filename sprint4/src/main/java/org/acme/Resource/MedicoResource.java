@@ -47,4 +47,23 @@ public class MedicoResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro de conexão com a Base de Dados").build();
         }
     }
+
+
+    //DELETE
+
+    //ELE não deleta caso esteja associado com outra tabela
+    @DELETE
+    @Path("/{id_medico}")
+    public Response deletar(@PathParam("id_medico") int id_medico){
+        try {
+            medicoService.remove(id_medico);
+            return Response.status(Response.Status.OK).entity("Dado removido").build();
+        } catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }catch (IllegalArgumentException e){
+            return Response.status(422).entity(e.getMessage()).build();
+        }catch (RuntimeException e){
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
 }

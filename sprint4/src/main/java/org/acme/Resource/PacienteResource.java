@@ -10,6 +10,7 @@ import org.acme.Model.Paciente;
 import org.acme.Service.PacienteService;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Path("/pacientes")
@@ -46,4 +47,10 @@ public class PacienteResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro de conexão com a Base de Dados").build();
         }
     }
+
+    //DELETE
+
+
+
+
 }
