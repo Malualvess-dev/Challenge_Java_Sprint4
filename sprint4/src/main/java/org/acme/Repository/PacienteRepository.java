@@ -19,7 +19,7 @@ public class PacienteRepository {
 
     //Classe Inserção de dados---- Funcionando
     public void inserir(PacienteDTO p) throws SQLException {
-        String sql = "Insert into paciente(nm_paciente,cpf_paciente,email_paciente, telefone_paciente, dt_nascimento) values (?,?,?,?,?)";
+        String sql = "Insert into paciente(nm_paciente,cpf_paciente,email_paciente, telefone_paciente, dt_nascimento,senha) values (?,?,?,?,?,?)";
         try(Connection con = dataSource.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
 
@@ -28,6 +28,7 @@ public class PacienteRepository {
             ps.setString(3,p.getEmail_paciente());
             ps.setString(4,p.getTelefone_paciente());
             ps.setString(5,p.getDt_nascimento());
+            ps.setString(6,p.getSenha());
 
             ps.executeUpdate();
         }
@@ -50,7 +51,9 @@ public class PacienteRepository {
                                           rs.getString(3),
                                           rs.getString(4),
                                           rs.getString(5),
-                                          rs.getString(6));
+                                          rs.getString(6),
+                                          rs.getString(7)
+                );
                 listaPaciente.add(p);
 
             }
@@ -76,14 +79,15 @@ public class PacienteRepository {
     }
 
     public void atualizar(int id_paciente, PacienteDTO pacienteDTO) throws SQLException{
-        String sql = "Update paciente set nm_paciente = ?, email_paciente = ?, telefone_paciente = ? where id_paciente = ?";
+        String sql = "Update paciente set nm_paciente = ?, email_paciente = ?, telefone_paciente = ?, senha = ? where id_paciente = ?";
         try (Connection con = dataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)){
 
             ps.setString(1,pacienteDTO.getNm_paciente());
             ps.setString(2, pacienteDTO.getEmail_paciente());
             ps.setString(3,pacienteDTO.getTelefone_paciente());
-            ps.setInt(4,id_paciente);
+            ps.setString(4,pacienteDTO.getSenha());
+            ps.setInt(5,id_paciente);
 
             int linhasAfetadas = ps.executeUpdate();
 

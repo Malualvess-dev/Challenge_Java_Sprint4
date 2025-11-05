@@ -58,6 +58,9 @@ public class PacienteService {
         if (pacienteDTO == null || pacienteDTO.getTelefone_paciente().isEmpty()){
             throw new IllegalArgumentException("Telefone incorreto");
         }
+        if (pacienteDTO == null || pacienteDTO.getSenha().isEmpty()){
+            throw new IllegalArgumentException("Senha incorreta");
+        }
     }
 
     }

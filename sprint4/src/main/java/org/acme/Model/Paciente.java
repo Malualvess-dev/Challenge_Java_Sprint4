@@ -7,6 +7,7 @@ public class Paciente {
     private String email_paciente;
     private String telefone_paciente;
     private String dt_nascimento;
+    private String senha;
 
     //Construtores
 
@@ -14,17 +15,26 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(int id_paciente, String nm_paciente, String cpf_paciente, String email_paciente, String telefone_paciente, String dt_nascimento) {
+    public Paciente(int id_paciente, String nm_paciente, String cpf_paciente, String email_paciente, String telefone_paciente, String dt_nascimento, String senha) {
         this.id_paciente = id_paciente;
         this.nm_paciente = nm_paciente;
         this.cpf_paciente = cpf_paciente;
         this.email_paciente = email_paciente;
         this.telefone_paciente = telefone_paciente;
         this.dt_nascimento = dt_nascimento;
+        this.senha = senha;;
     }
 
     //Get e Set
 
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public int getId_paciente() {
         return id_paciente;
