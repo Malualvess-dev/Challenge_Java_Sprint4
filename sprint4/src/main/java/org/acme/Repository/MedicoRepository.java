@@ -2,6 +2,7 @@ package org.acme.Repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.Model.DTO.EspecialidadeDTO;
 import org.acme.Model.DTO.MedicoDTO;
 import org.acme.Model.DTO.PacienteDTO;
 import org.acme.Model.Medico;
@@ -75,6 +76,26 @@ public class MedicoRepository {
             int linhasAfetadas = ps.executeUpdate();
             if (linhasAfetadas == 0){
                 throw  new IllegalArgumentException("Não deletou");
+            }
+        }
+    }
+
+    //Atualizar
+
+    public void atualizar(int id_medico, MedicoDTO medicoDTO) throws SQLException{
+        String sql = "Update medico set nm_medico = ?, email_medico = ?, tf_medico = ? where id_medico = ?";
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1,medicoDTO.getNm_medico());
+            ps.setString(2,medicoDTO.getEmail_medico());
+            ps.setString(3,medicoDTO.getTf_medico());
+            ps.setInt(4,id_medico);
+
+            int linhasAfetadas = ps.executeUpdate();
+
+            if (linhasAfetadas == 0){
+                throw new SQLException("SQL não removeu dados");
             }
         }
     }

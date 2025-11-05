@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.Model.DTO.EspecialidadeDTO;
 import org.acme.Model.DTO.MedicoDTO;
 import org.acme.Model.DTO.PacienteDTO;
 import org.acme.Model.Medico;
@@ -64,6 +65,21 @@ public class MedicoResource {
             return Response.status(422).entity(e.getMessage()).build();
         }catch (RuntimeException e){
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
+
+    //UPDATE
+
+    @PUT
+    @Path("/{id_medico}")
+    public Response atualizador(@PathParam("id_medico")int id_medico, MedicoDTO medicoDTO){
+        try{
+            medicoService.atualizar(id_medico, medicoDTO);
+            return Response.status(Response.Status.OK).entity("Médico com id " + id_medico+ " atualizado").build();
+        }catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        } catch (IllegalArgumentException e){
+            return  Response.status(422).entity(e.getMessage()).build();
         }
     }
 }

@@ -68,4 +68,19 @@ public class EspecialidadeResource {
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
         }
     }
+
+    //UPDATE
+
+    @PUT
+    @Path("/{id_especialidade}")
+    public Response atualizador(@PathParam("id_especialidade")int id_especialidade, EspecialidadeDTO especialidadeDTO){
+        try{
+            especialidadeService.atualizar(id_especialidade,especialidadeDTO);
+            return Response.status(Response.Status.OK).entity("Especialidade com id " + id_especialidade + " atualizada").build();
+        }catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        } catch (IllegalArgumentException e){
+            return  Response.status(422).entity(e.getMessage()).build();
+        }
+    }
 }

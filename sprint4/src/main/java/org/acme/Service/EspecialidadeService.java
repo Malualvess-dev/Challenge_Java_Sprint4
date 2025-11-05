@@ -35,4 +35,24 @@ public class EspecialidadeService {
         }
         especialidadeRepository.remover(id_especialidade);
     }
+
+    //Atualizar
+
+    public void atualizar(int id_especialidade, EspecialidadeDTO especialidadeDTO) throws SQLException, IllegalArgumentException{
+        validacao(especialidadeDTO);
+        if (id_especialidade < 0){
+            throw new IllegalArgumentException("ID menor que 1");
+        }
+        especialidadeRepository.atualizar(id_especialidade,especialidadeDTO);
+    }
+
+
+
+    public void validacao(EspecialidadeDTO especialidadeDTO){
+        if (especialidadeDTO==null|| especialidadeDTO.getNm_especialidade().isEmpty() ){
+            throw new IllegalArgumentException("Nome de especialidade incorreta");
+        }
+
+    }
+
 }

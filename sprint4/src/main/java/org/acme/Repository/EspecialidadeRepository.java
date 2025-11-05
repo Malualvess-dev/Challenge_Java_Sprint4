@@ -85,4 +85,21 @@ public class EspecialidadeRepository {
 
     }
 
+    //Atualizar
+
+    public void atualizar(int id_especialidade, EspecialidadeDTO especialidadeDTO) throws SQLException{
+        String sql = "Update especialidade set nm_especialidade = ? where id_especialidade = ?";
+        try (Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1,especialidadeDTO.getNm_especialidade());
+            ps.setInt(2,id_especialidade);
+
+            int linhasAfetadas = ps.executeUpdate();
+
+            if (linhasAfetadas == 0){
+                throw new SQLException("SQL não removeu dados");
+            }
+        }
+    }
 }
