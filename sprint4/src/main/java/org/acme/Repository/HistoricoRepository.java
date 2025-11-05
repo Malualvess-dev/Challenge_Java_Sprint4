@@ -2,6 +2,7 @@ package org.acme.Repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.Model.DTO.AgendamentoDTO;
 import org.acme.Model.DTO.HistoricoDTO;
 import org.acme.Model.DTO.PacienteDTO;
 import org.acme.Model.Historico;
@@ -73,4 +74,5 @@ public class HistoricoRepository {
             }
         }
     }
+
 }

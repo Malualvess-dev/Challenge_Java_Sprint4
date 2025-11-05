@@ -36,4 +36,26 @@ public class ProntuarioService {
         }
         prontuarioRepository.remover(id_prontuario);
     }
+
+    //Atualizar
+
+    public void atualizar(int id_prontuario, ProntuarioDTO prontuarioDTO) throws SQLException, IllegalArgumentException{
+        validacao(prontuarioDTO);
+        if (id_prontuario < 0){
+            throw new IllegalArgumentException("ID menor que 1");
+        }
+        prontuarioRepository.atualizar(id_prontuario, prontuarioDTO);
+    }
+
+
+
+    public void validacao(ProntuarioDTO prontuarioDTO){
+        if (prontuarioDTO == null || prontuarioDTO.getDt_registro().isEmpty()){
+            throw new IllegalArgumentException("Data incorreta");
+        }
+        if (prontuarioDTO == null || prontuarioDTO.getDescricao().isEmpty()){
+            throw new IllegalArgumentException("Descrição incorreta");
+        }
+
+    }
 }

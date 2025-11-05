@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.Model.DTO.AgendamentoDTO;
 import org.acme.Model.DTO.PacienteDTO;
 import org.acme.Model.DTO.ProntuarioDTO;
 import org.acme.Model.Paciente;
@@ -64,6 +65,21 @@ public class ProntuarioResource {
             return Response.status(422).entity(e.getMessage()).build();
         }catch (RuntimeException e){
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
+
+    //UPDATE
+
+    @PUT
+    @Path("/{id_prontuario}")
+    public Response atualizador(@PathParam("id_prontuario")int id_prontuario, ProntuarioDTO prontuarioDTO){
+        try{
+            prontuarioService.atualizar(id_prontuario, prontuarioDTO);
+            return Response.status(Response.Status.OK).entity("Prontuario com id " + id_prontuario + " atualizado").build();
+        }catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        } catch (IllegalArgumentException e){
+            return  Response.status(422).entity(e.getMessage()).build();
         }
     }
 }

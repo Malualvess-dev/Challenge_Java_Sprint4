@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.Model.Agendamento;
 import org.acme.Model.DTO.AgendamentoDTO;
+import org.acme.Model.DTO.EspecialidadeDTO;
 import org.acme.Model.Paciente;
 import org.acme.Service.AgendamentoService;
 
@@ -64,6 +65,21 @@ public class AgendamentoResource {
             return Response.status(422).entity(e.getMessage()).build();
         }catch (RuntimeException e){
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
+
+    //UPDATE
+
+    @PUT
+    @Path("/{id_agendamento}")
+    public Response atualizador(@PathParam("id_agendamento")int id_agendamento, AgendamentoDTO agendamentoDTO){
+        try{
+            agendamentoService.atualizar(id_agendamento, agendamentoDTO);
+            return Response.status(Response.Status.OK).entity("Agendamento com id " + id_agendamento + " atualizado").build();
+        }catch (SQLException e){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        } catch (IllegalArgumentException e){
+            return  Response.status(422).entity(e.getMessage()).build();
         }
     }
 

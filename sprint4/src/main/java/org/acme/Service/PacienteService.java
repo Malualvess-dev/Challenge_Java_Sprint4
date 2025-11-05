@@ -2,6 +2,7 @@ package org.acme.Service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.Model.DTO.EspecialidadeDTO;
 import org.acme.Model.DTO.PacienteDTO;
 import org.acme.Model.Paciente;
 import org.acme.Repository.PacienteRepository;
@@ -35,39 +36,29 @@ public class PacienteService {
         pacienteRepository.remover(id_paciente);
     }
 
+    //Atualizar
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //Validações
-
-    public void validacao(PacienteDTO p)  {
-        if(p == null || p.getNm_paciente().isEmpty() ){
-            throw  new IllegalArgumentException("Nome incorreto");
+    public void atualizar(int id_paciente, PacienteDTO pacienteDTO) throws SQLException, IllegalArgumentException{
+        validacao(pacienteDTO);
+        if (id_paciente < 0){
+            throw new IllegalArgumentException("ID menor que 1");
         }
+        pacienteRepository.atualizar(id_paciente, pacienteDTO);
+    }
 
-        if (p == null || p.getCpf_paciente().isEmpty()){
-            throw  new IllegalArgumentException("CPF incorreto");
+
+
+    public void validacao(PacienteDTO pacienteDTO){
+        if (pacienteDTO==null|| pacienteDTO.getNm_paciente().isEmpty() ){
+            throw new IllegalArgumentException("Nome do paciente incorreto");
         }
-        if (p == null || p.getEmail_paciente().isEmpty()){
-            throw  new IllegalArgumentException("Email incorreto");
+        if (pacienteDTO == null || pacienteDTO.getEmail_paciente().isEmpty()){
+            throw new IllegalArgumentException("Email incorreto");
         }
-        if (p== null || p.getTelefone_paciente().isEmpty()){
+        if (pacienteDTO == null || pacienteDTO.getTelefone_paciente().isEmpty()){
             throw new IllegalArgumentException("Telefone incorreto");
         }
     }
+
     }
-
-
-
-
 

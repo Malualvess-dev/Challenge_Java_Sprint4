@@ -75,4 +75,21 @@ public class ProntuarioRepository {
             }
         }
     }
+
+    public void atualizar(int id_prontuario, ProntuarioDTO prontuarioDTO) throws SQLException{
+        String sql = "Update prontuario set descricao = ?, dt_registro = ? where id_prontuario = ?";
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1,prontuarioDTO.getDt_registro());
+            ps.setString(2, prontuarioDTO.getDescricao());
+            ps.setInt(3,id_prontuario);
+
+            int linhasAfetadas = ps.executeUpdate();
+
+            if (linhasAfetadas == 0){
+                throw new SQLException("SQL não removeu dados");
+            }
+        }
+    }
 }

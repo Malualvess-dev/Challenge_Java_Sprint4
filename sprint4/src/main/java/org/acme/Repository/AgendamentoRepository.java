@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.Model.Agendamento;
 import org.acme.Model.DTO.AgendamentoDTO;
+import org.acme.Model.DTO.EspecialidadeDTO;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -80,6 +81,26 @@ public class AgendamentoRepository {
     }
 
     //--------------------------------------------------------------------------
+
+    //Atualizar
+
+    public void atualizar(int id_agendamento, AgendamentoDTO agendamentoDTO) throws SQLException{
+        String sql = "Update agendamento set dt_agendamento = ?, hr_agendamento = ?, st_agendamento = ? where id_agendamento = ?";
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setString(1,agendamentoDTO.getDt_agendamento());
+            ps.setString(2,agendamentoDTO.getHr_agendamento());
+            ps.setString(3,String.valueOf(agendamentoDTO.getSt_agendamento()));
+            ps.setInt(4,id_agendamento);
+
+            int linhasAfetadas = ps.executeUpdate();
+
+            if (linhasAfetadas == 0){
+                throw new SQLException("SQL não removeu dados");
+            }
+        }
+    }
 }
 
 
